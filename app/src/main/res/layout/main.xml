@@ -8,7 +8,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/estos_son_los_datos_del_usuario"
+        android:id="@+id/textoBienvenida"
+        android:text="@string/hola_este_es_el_main"
         android:textSize="20sp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnIrDatosUsuario"
+        android:text="@string/ir_a_los_datos_del_usuario" />
 </LinearLayout>
