@@ -2,5 +2,9 @@
     <string name="app_name">Fitcam-</string>
     <string name="hola_este_es_el_main">Hola, este es el main</string>
     <string name="ir_a_los_datos_del_usuario">Ir a los datos del usuario</string>
-    <string name="estos_son_los_datos_del_usuario">Estos son los datos del usuario</string>
+    <string name="Peso_actual">Peso actual</string>
+    <string name="altura_actual">Altura actual</string>
+    <string name="nueva_altura">Nueva altura</string>
+    <string name="nuevo_peso">Nuevo peso</string>
+    <string name="actualizar_datos">Actualizar datos</string>
 </resources>

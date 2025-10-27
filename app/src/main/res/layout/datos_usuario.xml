@@ -3,12 +3,46 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textPesoActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Peso_actual"
+        android:textSize="18sp"
+        android:paddingBottom="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/estos_son_los_datos_del_usuario"
-        android:textSize="20sp" />
+        android:id="@+id/textAlturaActual"
+        android:text="@string/altura_actual"
+        android:textSize="18sp"
+        android:paddingBottom="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editPeso"
+        android:hint="@string/nuevo_peso"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editAltura"
+        android:hint="@string/nueva_altura"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnActualizar"
+        android:text="@string/actualizar_datos"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
