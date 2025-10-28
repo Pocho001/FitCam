@@ -11,27 +11,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:layout_gravity="left">
 
-        <Button
-            android:id="@+id/linearLayout"
+        <ImageButton
+            android:id="@+id/btnAtras"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginVertical="9dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="83dp"
-            android:orientation="vertical" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/chevron_left_thin"
+            android:contentDescription="@string/atras"
+            android:scaleType="fitXY"
+        />
 
         <TextView
             android:id="@+id/textDatosDeUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="9dp"
+            android:layout_marginStart="95dp"
             android:text="@string/datos_de_usuario"
             android:textColor="#000000"
             android:textSize="17sp"
-            android:textStyle="bold"
-            android:layout_marginEnd="8dp"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
