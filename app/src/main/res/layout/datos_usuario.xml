@@ -4,7 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/linearLayout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginVertical="9dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="83dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/textDatosDeUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="9dp"
+            android:text="@string/datos_de_usuario"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="8dp"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textPesoActual"
@@ -42,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnActualizar"
-        android:text="@string/actualizar_datos"
+        android:text="@string/guardar_informacion"
         android:layout_marginTop="20dp" />
 
 </LinearLayout>

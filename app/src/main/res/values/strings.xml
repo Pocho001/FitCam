@@ -6,5 +6,6 @@
     <string name="altura_actual">Altura actual</string>
     <string name="nueva_altura">Nueva altura</string>
     <string name="nuevo_peso">Nuevo peso</string>
-    <string name="actualizar_datos">Actualizar datos</string>
+    <string name="guardar_informacion">Guardar informcación</string>
+    <string name="datos_de_usuario">Datos de usuario</string>
 </resources>
