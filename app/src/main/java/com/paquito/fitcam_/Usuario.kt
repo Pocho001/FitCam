@@ -7,6 +7,7 @@ import android.content.Context
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.ImageButton
 
 class Usuario : ComponentActivity() {
     @SuppressLint("SetTextI18n")
@@ -15,10 +16,15 @@ class Usuario : ComponentActivity() {
         setContentView(R.layout.datos_usuario)
 
         val txtPesoActual = findViewById<TextView>(R.id.textPesoActual)
+        val txtDatosDeUsuario = findViewById<TextView>(id = R.id.textDatosDeUsuario)
+        val txtConfiguraTusMedidas = findViewById<TextView>(id = R.id.textConfiguraTusMedidas)
+        val txtConsejoUsuario = findViewById<TextView>( id = R.id.textConsejoUsuario)
         val txtAlturaActual = findViewById<TextView>(R.id.textAlturaActual)
         val editPeso = findViewById<EditText>(R.id.editPeso)
         val editAltura = findViewById<EditText>(R.id.editAltura)
+        val btnAtras = findViewById<ImageButton>( id = R.id.btnAtras)
         val btnActualizar = findViewById<Button>(R.id.btnActualizar)
+        val btnCasa = findViewById<ImageButton>( id = R.id.btnCasa)
 
         val prefs = getSharedPreferences("DatosUsuario", Context.MODE_PRIVATE)
         val pesoGuardado = prefs.getFloat("peso", 0f)

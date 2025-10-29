@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:gravity="center_horizontal"
-    android:padding="20dp"
-    android:background="#FFFFFF">
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <LinearLayout
+        android:id="@+id/LinearLayaut1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="left"
         android:orientation="horizontal"
-        android:layout_gravity="left">
+        tools:ignore="RtlHardcoded">
 
         <ImageButton
             android:id="@+id/btnAtras"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/chevron_left_thin"
             android:contentDescription="@string/atras"
             android:scaleType="fitXY"
-        />
+            android:src="@drawable/Chevron_Left"/>
 
         <TextView
             android:id="@+id/textDatosDeUsuario"
@@ -34,43 +36,145 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textPesoActual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Peso_actual"
-        android:textSize="18sp"
-        android:paddingBottom="20dp"/>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="360dp"
+        android:layout_height="432dp"
+        android:layout_marginVertical="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="11dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textAlturaActual"
-        android:text="@string/altura_actual"
-        android:textSize="18sp"
-        android:paddingBottom="20dp" />
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="312dp"
+            android:layout_height="55dp"
+            android:layout_margin="24dp"
+            android:orientation="vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editPeso"
-        android:hint="@string/nuevo_peso"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/textConfiguraTusMedidas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/configura_tus_medidas"
+                android:textColor="#1E1E1E"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editAltura"
-        android:hint="@string/nueva_altura"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/textConsejoUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/esto_servira_para_adaptar_lo_ejercicios_a_ti"
+                android:textColor="#757575"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnActualizar"
-        android:text="@string/guardar_informacion"
-        android:layout_marginTop="20dp" />
+        <LinearLayout
+            android:id="@+id/linearLayoutPeso"
+            android:layout_width="312dp"
+            android:layout_height="70dp"
+            android:layout_margin="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textPesoActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/Peso_actual"
+                android:textColor="#1E1E1E"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/nuevo_peso"
+                android:inputType="numberDecimal"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutAltura"
+            android:layout_width="312dp"
+            android:layout_height="70dp"
+            android:layout_margin="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textAlturaActual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/altura_actual"
+                android:textColor="#1E1E1E"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editAltura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nueva_altura"
+                android:inputType="numberDecimal"
+                android:autofillHints=""
+            />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnActualizar"
+            android:layout_width="312dp"
+            android:layout_height="40dp"
+            android:layout_margin="24dp"
+            android:text="@string/guardar_informacion"
+            android:background="@color/black"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBarra"
+        android:layout_width="332dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnCasa"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="126dp"
+            android:layout_marginBottom="31dp"
+            android:src="@drawable/Home_Fill"
+            android:contentDescription="@string/home"/>
+
+        <ImageButton
+            android:id="@+id/btnFavoritos"
+            android:layout_width="27dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="355dp"
+            android:background="@color/white"
+            android:src="@drawable/favorite"
+            android:contentDescription="@string/favoritos"/>
+
+        <ImageButton
+            android:id="@+id/btnPerfil"
+            android:layout_width="30dp"
+            android:layout_height="26dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/white"
+            android:contentDescription="@string/perfil_de_usuario"
+            android:src="@drawable/following" />
+
+    </LinearLayout>
 
 </LinearLayout>
