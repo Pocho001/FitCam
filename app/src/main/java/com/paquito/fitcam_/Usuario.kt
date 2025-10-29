@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.ImageButton
 import android.content.Intent
 import androidx.core.content.edit
-
+import android.widget.Toast
 class Usuario : ComponentActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?){
@@ -68,13 +68,13 @@ class Usuario : ComponentActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            val intent = Intent(this, Usuario::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Ya se encuentra en los datos del usuario", Toast.LENGTH_SHORT).show()
         }
 
         btnFavoritos.setOnClickListener {
-            val intent = Intent(this, Favoritos::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            /*val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)*/
         }
     }
 }
