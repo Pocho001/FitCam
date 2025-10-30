@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/LinearLayaut1"
