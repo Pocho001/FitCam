@@ -9,10 +9,11 @@
 
     <LinearLayout
         android:id="@+id/LinearLayaut1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:orientation="horizontal"
+        android:layout_marginTop="33dp"
         tools:ignore="RtlHardcoded">
 
         <ImageButton
@@ -28,7 +29,7 @@
             android:id="@+id/textDatosDeUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="95dp"
+            android:layout_marginStart="107dp"
             android:text="@string/datos_de_usuario"
             android:textColor="#000000"
             android:textSize="17sp"
@@ -94,8 +95,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:hint="@string/nuevo_peso"
-                android:inputType="numberDecimal"
-            />
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 
@@ -120,10 +120,9 @@
                 android:id="@+id/editAltura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nueva_altura"
-                android:inputType="numberDecimal"
                 android:autofillHints=""
-            />
+                android:hint="@string/nueva_altura"
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 
@@ -132,9 +131,9 @@
             android:layout_width="312dp"
             android:layout_height="40dp"
             android:layout_margin="24dp"
-            android:text="@string/guardar_informacion"
             android:background="@color/black"
-            android:textColor="@color/white"/>
+            android:text="@string/guardar_informacion"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

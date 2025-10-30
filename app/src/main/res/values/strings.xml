@@ -12,4 +12,10 @@
     <string name="perfil_de_usuario">Perfil de usuario</string>
     <string name="favoritos">Favoritos</string>
     <string name="home">Home</string>
+    <string name="consejos">Consejos:</string>
+    <string name="que_vamos_a_hacer_hoy">¿Que vamos a hacer hoy?</string>
+    <string name="boton_del_rea_pierna">Boton del área pierna</string>
+    <string name="bot_n_del_rea_brazo">Botón del área brazo</string>
+    <string name="bot_n_del_rea_espalda">Botón del área espalda</string>
+    <string name="bot_n_del_rea_dorso">Botón del área dorso</string>
 </resources>
