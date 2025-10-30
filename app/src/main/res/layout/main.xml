@@ -57,60 +57,142 @@
 
     <LinearLayout
         android:id="@+id/linearLayautArea"
-        android:layout_height="115dp"
+        android:layout_height="85dp"
         android:layout_width="match_parent"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btnPierna"
-            android:layout_height="match_parent"
+            android:layout_height="85dp"
             android:layout_width="85dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/boton_redondo"
             android:src="@drawable/pierna_icon"
             android:scaleType="centerCrop"
             android:contentDescription="@string/boton_del_rea_pierna"
-            android:padding="12dp"/>
+            android:padding="4dp"/>
 
         <ImageButton
             android:id="@+id/btnBrazo"
-            android:layout_height="match_parent"
+            android:layout_height="85dp"
             android:layout_width="85dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/boton_redondo"
             android:src="@drawable/brazo_icon"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/bot_n_del_rea_brazo"
-            android:padding="10dp"/>
+            android:contentDescription="@string/bot_n_del_rea_brazo"/>
 
         <ImageButton
             android:id="@+id/btnEspalda"
-            android:layout_height="match_parent"
+            android:layout_height="85dp"
             android:layout_width="85dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/boton_redondo"
             android:src="@drawable/espalda_icon"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/bot_n_del_rea_espalda"
-            android:padding="7dp"/>
+            android:contentDescription="@string/bot_n_del_rea_espalda"/>
 
         <ImageButton
             android:id="@+id/btnDorso"
-            android:layout_height="match_parent"
+            android:layout_height="85dp"
             android:layout_width="85dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/boton_redondo"
             android:src="@drawable/dorso_icon"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/bot_n_del_rea_dorso"/>
+            android:contentDescription="@string/bot_n_del_rea_dorso"
+            android:adjustViewBounds="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutNombresDeArea"
+        android:layout_height="31dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtPierna"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/pierna"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="18dp"/>
+
+        <TextView
+            android:id="@+id/txtBrazo"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/brazo"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="37dp"
+            android:layout_marginEnd="18dp"/>
+
+        <TextView
+            android:id="@+id/txtEspalda"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/espalda"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="37dp"
+            android:layout_marginEnd="18dp"/>
+
+        <TextView
+            android:id="@+id/txtDorso"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/dorso"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="34dp"
+            android:layout_marginEnd="18dp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:id="@+id/linearLayoutQueVamosAHacerHoy"
+        android:layout_width="375dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtObservaTuProgreso"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginVertical="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/observa_tu_progreso"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn"
+            android:layout_height="match_parent"
+            android:layout_width="152dp"
+            android:layout_marginStart="17dp"/>
+
+    </LinearLayout>
+
 
     <Space
         android:layout_width="match_parent"
