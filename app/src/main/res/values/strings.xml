@@ -23,4 +23,8 @@
     <string name="espalda">Espalda</string>
     <string name="dorso">Dorso</string>
     <string name="observa_tu_progreso">Observa tu progreso</string>
+    <string name="bot_n_del_historial">Botón del historial</string>
+    <string name="bot_n_de_tu_progreso">botón de tu progreso</string>
+    <string name="historial">Historial</string>
+    <string name="tu_progreso">Tu progreso</string>
 </resources>
