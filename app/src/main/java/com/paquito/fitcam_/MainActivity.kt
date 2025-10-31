@@ -1,21 +1,80 @@
 package com.paquito.fitcam_
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.widget.TextView
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
+        val consejos = listOf(
+            "Toma agua antes de cada comida 💧",
+            "Haz estiramientos 5 minutos al despertar 🧘‍♂️",
+            "No te saltes el desayuno 🍳",
+            "Camina al menos 30 minutos al dia 🚶",
+            "Duerme bien, tu cuerpo lo necesita 😴",
+            "No te compares, avanza a tu ritmo 💪"
+        )
+
+        val txtConsejos = findViewById<TextView>(R.id.txtConsejos)
+        val txtQueVamosAHacerHoy = findViewById<TextView>(R.id.txtQueVamosAHacerHoy)
+        val txtPierna = findViewById<TextView>(R.id.txtPierna)
+        val txtBrazo = findViewById<TextView>(R.id.txtBrazo)
+        val txtEspalda = findViewById<TextView>(R.id.txtEspalda)
+        val txtDorso = findViewById<TextView>(R.id.txtDorso)
+        val txtObservaTuProgreso = findViewById<TextView>(R.id.txtObservaTuProgreso)
+        val txtHistorial = findViewById<TextView>(R.id.txtHistorial)
+        val txtTuProgreso = findViewById<TextView>(R.id.txtTuProgreso)
+
+        val btnEjercicioAleatorio = findViewById<ImageButton>(R.id.btnEjercicioAleatorio)
+        val btnPierna = findViewById<ImageButton>(R.id.btnPierna)
+        val btnBrazo = findViewById<ImageButton>(R.id.btnBrazo)
+        val btnEspalda = findViewById<ImageButton>(R.id.btnEspalda)
+        val btnDorso = findViewById<ImageButton>(R.id.btnDorso)
+        val btnHistorial = findViewById<ImageButton>(R.id.btnHistorial)
+        val btnTuProgreso = findViewById<ImageButton>(R.id.btnTuProgreso)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
         val btnFavoritos = findViewById<ImageButton>(R.id.btnFavoritos)
         val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
+
+        txtConsejos.text = consejos.random()
+        txtQueVamosAHacerHoy.text = "¿Qué vámos a hacer hoy?"
+        txtPierna.text = "Pierna"
+        txtBrazo.text = "Brazo"
+        txtEspalda.text = "Espalda"
+        txtDorso.text = "Dorso"
+        txtObservaTuProgreso.text = "Observa tu progreso"
+        txtHistorial.text = "Historial"
+        txtTuProgreso.text = "Tu progreso"
+
+        btnEjercicioAleatorio.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnPierna.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnBrazo.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnEspalda.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnDorso.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnHistorial.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
+        btnTuProgreso.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+        }
 
         btnCasa.setOnClickListener {
             Toast.makeText(this, "Ya se encuentra en el main", Toast.LENGTH_SHORT).show()

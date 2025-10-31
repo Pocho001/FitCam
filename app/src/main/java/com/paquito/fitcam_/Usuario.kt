@@ -22,8 +22,10 @@ class Usuario : ComponentActivity() {
         val txtConfiguraTusMedidas = findViewById<TextView>(R.id.textConfiguraTusMedidas)
         val txtConsejoUsuario = findViewById<TextView>(R.id.textConsejoUsuario)
         val txtAlturaActual = findViewById<TextView>(R.id.textAlturaActual)
+
         val editPeso = findViewById<EditText>(R.id.editPeso)
         val editAltura = findViewById<EditText>(R.id.editAltura)
+
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnActualizar = findViewById<Button>(R.id.btnActualizar)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
@@ -36,7 +38,7 @@ class Usuario : ComponentActivity() {
 
         txtDatosDeUsuario.text = "Datos de usuario"
         txtConfiguraTusMedidas.text = "Configura tus medidas"
-        txtConsejoUsuario.text = "Esto servira para adoptar los ejercicios a ti"
+        txtConsejoUsuario.text = "Esto servirá para adoptar los ejercicios a ti"
 
         txtPesoActual.text = "Peso actual: ${if (pesoGuardado != 0f) pesoGuardado else "No registrado"} kg"
         txtAlturaActual.text = "Altura actual: ${if (alturaGuardada != 0f) alturaGuardada else "No registrada"} m"
