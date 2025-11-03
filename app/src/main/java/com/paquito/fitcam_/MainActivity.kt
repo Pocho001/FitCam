@@ -55,7 +55,8 @@ class MainActivity : ComponentActivity() {
         txtTuProgreso.text = "Tu progreso"
 
         btnEjercicioAleatorio.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TestCamera::class.java)
+            startActivity(intent)
         }
         btnPierna.setOnClickListener {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
