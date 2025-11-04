@@ -30,7 +30,8 @@
         <activity android:name=".Usuario" />
         <activity
             android:name=".TestCamera"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
+            android:exported="false"
             tools:ignore="Instantiatable" />
     </application>
 
