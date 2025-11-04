@@ -30,6 +30,8 @@ class TestCamera : ComponentActivity() {
     private lateinit var poseOverlay: PoseOverlayView
     private var interpreter: Interpreter? = null
     private lateinit var imageProcessor: ImageProcessor
+    private var contador = 0
+    private var estaAbajo = false
 
     companion object {
         private const val TAG = "TestCamera"
@@ -152,6 +154,27 @@ class TestCamera : ComponentActivity() {
                     }
                 }
 
+                //Sentadilla (rodilla)
+                val caderaY = keypoints[11 * 3 + 1]
+                val rodillaY = keypoints[13 * 3 + 1]
+                val tobilloY = keypoints[15 * 3 + 1]
+
+                val caderaX = keypoints[11 * 3]
+                val rodillaX = keypoints[13 * 3]
+                val tobilloX = keypoints[15 * 3]
+
+                val anguloRodilla = calcularAngulo(caderaX, caderaY, rodillaX, rodillaY, tobilloX, tobilloY)
+                Log.d(TAG, "\uD83E\uDDB5 Angulo rodilla: $anguloRodilla")
+
+                if(anguloRodilla < 90 && !estaAbajo)
+                    estaAbajo = true
+                else if(anguloRodilla > 160 && estaAbajo){
+                    estaAbajo = false
+                    contador++
+                    guardarProgreso(contador)
+                    Log.d(TAG, "✅ Sentadilla detectada #$contador")
+                }
+
                 // Actualizar el overlay en el hilo principal
                 runOnUiThread {
                     poseOverlay.updateKeypoints(keypoints, detectedPoints)
@@ -171,6 +194,29 @@ class TestCamera : ComponentActivity() {
                 }
             }
         }
+    }
+
+    //Para los ejercicios obtiene el angulo
+    private fun calcularAngulo(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float): Double{
+        val a = Math.toDegrees(
+            Math.atan2((y3 - y2).toDouble(), (x3 - x2).toDouble()) -
+            Math.atan2((y1 - y2).toDouble(), (x1 - x2).toDouble())
+        )
+        var angulo = Math.abs(a)
+        if(angulo > 180) angulo = 360 - angulo
+        return angulo
+    }
+
+    private fun guardarProgreso(reps: Int) {
+        val prefs = getSharedPreferences("fitcam_data", MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putInt("reps_sentadilla", reps)
+        editor.apply()
+    }
+
+    private fun cargarProgreso() {
+        val prefs = getSharedPreferences("fitcam_prefs", MODE_PRIVATE)
+        contador = prefs.getInt("squats", 0)
     }
 
     override fun onDestroy() {

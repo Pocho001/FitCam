@@ -193,7 +193,8 @@
             android:layout_marginStart="17dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="@string/bot_n_del_historial"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@drawable/historial_icono"
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/btnTuProgreso"
@@ -201,7 +202,8 @@
             android:layout_width="152dp"
             android:layout_marginStart="30dp"
             android:contentDescription="@string/bot_n_de_tu_progreso"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@drawable/tu_progreso_icono"
+            android:scaleType="centerCrop"/>
 
     </LinearLayout>
 
