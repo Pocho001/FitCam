@@ -20,8 +20,7 @@ class MainActivity : ComponentActivity() {
             "No te saltes el desayuno 🍳",
             "Camina al menos 30 minutos al dia 🚶",
             "Duerme bien, tu cuerpo lo necesita 😴",
-            "No te compares, avanza a tu ritmo 💪",
-            "Haz ejercicio wei"
+            "No te compares, avanza a tu ritmo 💪"
         )
 
         val txtConsejos = findViewById<TextView>(R.id.txtConsejos)
