@@ -23,13 +23,14 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/atras"
             android:scaleType="fitXY"
+            android:layout_marginStart="30dp"
             android:src="@drawable/chevron_left" />
 
         <TextView
             android:id="@+id/textDatosDeUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="107dp"
+            android:layout_marginStart="80dp"
             android:text="@string/datos_de_usuario"
             android:textColor="#000000"
             android:textSize="17sp"
