@@ -19,6 +19,7 @@
         android:theme="@style/Theme.Fitcam" >
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.Fitcam" >
             <intent-filter>
@@ -27,7 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Usuario" />
+        <activity
+            android:name=".Usuario"
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+
         <activity
             android:name=".TestCamera"
             android:screenOrientation="portrait"
