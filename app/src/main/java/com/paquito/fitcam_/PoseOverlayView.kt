@@ -49,6 +49,8 @@ class PoseOverlayView @JvmOverloads constructor(
         Pair(12, 14), Pair(14, 16)
     )
 
+    private var extraText: String = ""
+
     fun updateKeypoints(keypoints: FloatArray, detectedCount: Int) {
         this.keypoints = keypoints
         this.detectedCount = detectedCount
@@ -58,6 +60,11 @@ class PoseOverlayView @JvmOverloads constructor(
     fun clear() {
         keypoints = null
         detectedCount = 0
+        invalidate()
+    }
+
+    fun setExtraText(text: String){
+        extraText = text
         invalidate()
     }
 
@@ -117,5 +124,15 @@ class PoseOverlayView @JvmOverloads constructor(
             100f,
             textPaint
         )
+
+        if (extraText.isNotEmpty()) {
+            val textPaint = Paint().apply {
+                color = Color.YELLOW
+                textSize = 48f
+                style = Paint.Style.FILL
+                textAlign = Paint.Align.LEFT
+            }
+            canvas.drawText(extraText, 40f, 80f, textPaint)
+        }
     }
 }

@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.main)
 
         val consejos = listOf(
-            "Toma agua antes de cada comida 💧",
+            "Toma agua antes de cada ejercicio 💧",
             "Haz estiramientos 5 minutos al despertar 🧘‍♂️",
             "No te saltes el desayuno 🍳",
             "Camina al menos 30 minutos al dia 🚶",
@@ -59,7 +59,8 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnPierna.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SeleccionEjercicio::class.java)
+            startActivity(intent)
         }
         btnBrazo.setOnClickListener {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
@@ -71,7 +72,8 @@ class MainActivity : ComponentActivity() {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
         btnHistorial.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Historial::class.java)
+            startActivity(intent)
         }
         btnTuProgreso.setOnClickListener {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()

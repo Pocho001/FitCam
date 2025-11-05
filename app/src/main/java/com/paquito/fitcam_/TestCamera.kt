@@ -12,6 +12,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import android.graphics.Matrix
+import androidx.compose.ui.text.intl.Locale
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.tensorflow.lite.DataType
@@ -23,6 +24,11 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import com.paquito.fitcam_.utils.toBitmap
+import java.sql.Date
+import kotlin.math.abs
+import kotlin.math.atan2
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TestCamera : ComponentActivity() {
 
@@ -32,6 +38,14 @@ class TestCamera : ComponentActivity() {
     private lateinit var imageProcessor: ImageProcessor
     private var contador = 0
     private var estaAbajo = false
+    private var tipoEjercicio: String? = null
+    private var abdominalEstado = "inicio"
+    private var abdominalesCompletas = 0
+    private var estadoSentadilla = "arriba"
+    private var sentadillasCompletas = 0
+    private var estadoLagartija = "arriba"
+    private var lagartijasCompletas = 0
+
 
     companion object {
         private const val TAG = "TestCamera"
@@ -43,6 +57,8 @@ class TestCamera : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.test_camara)
+        tipoEjercicio = intent.getStringExtra("ejercicio")
+        Log.d(TAG, "Ejercicio seleccionado: $tipoEjercicio")
 
         window.decorView.systemUiVisibility =
             (android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -154,25 +170,10 @@ class TestCamera : ComponentActivity() {
                     }
                 }
 
-                //Sentadilla (rodilla)
-                val caderaY = keypoints[11 * 3 + 1]
-                val rodillaY = keypoints[13 * 3 + 1]
-                val tobilloY = keypoints[15 * 3 + 1]
-
-                val caderaX = keypoints[11 * 3]
-                val rodillaX = keypoints[13 * 3]
-                val tobilloX = keypoints[15 * 3]
-
-                val anguloRodilla = calcularAngulo(caderaX, caderaY, rodillaX, rodillaY, tobilloX, tobilloY)
-                Log.d(TAG, "\uD83E\uDDB5 Angulo rodilla: $anguloRodilla")
-
-                if(anguloRodilla < 90 && !estaAbajo)
-                    estaAbajo = true
-                else if(anguloRodilla > 160 && estaAbajo){
-                    estaAbajo = false
-                    contador++
-                    guardarProgreso(contador)
-                    Log.d(TAG, "✅ Sentadilla detectada #$contador")
+                when(tipoEjercicio){
+                    "Sentadilla" -> detectarSentadilla(keypoints)
+                    "Lagartija" -> detectarLagartija(keypoints)
+                    "Abdominal" -> detectarAbdominal(keypoints)
                 }
 
                 // Actualizar el overlay en el hilo principal
@@ -197,26 +198,120 @@ class TestCamera : ComponentActivity() {
     }
 
     //Para los ejercicios obtiene el angulo
-    private fun calcularAngulo(x1: Float, y1: Float, x2: Float, y2: Float, x3: Float, y3: Float): Double{
-        val a = Math.toDegrees(
-            Math.atan2((y3 - y2).toDouble(), (x3 - x2).toDouble()) -
-            Math.atan2((y1 - y2).toDouble(), (x1 - x2).toDouble())
+    private fun calcularAngulo(a: Pair<Float, Float>, b: Pair<Float, Float>, c: Pair<Float, Float>): Double {
+        val angulo = Math.toDegrees(
+            (atan2(c.second - b.second, c.first - b.first) -
+                    atan2(a.second - b.second, a.first - b.first)).toDouble()
         )
-        var angulo = Math.abs(a)
-        if(angulo > 180) angulo = 360 - angulo
-        return angulo
+
+        // Ajustar el angulo para que siempre este entre 0 y 180
+        var anguloAbs = abs(angulo)
+        if (anguloAbs > 180) {
+            anguloAbs = 360 - anguloAbs
+        }
+        return anguloAbs
     }
 
-    private fun guardarProgreso(reps: Int) {
-        val prefs = getSharedPreferences("fitcam_data", MODE_PRIVATE)
+    private fun detectarSentadilla(keypoints: FloatArray){
+        val cadera = getPoint(keypoints, 12)
+        val rodilla = getPoint(keypoints, 14)
+        val tobillo = getPoint(keypoints, 16)
+        val anguloPierna = calcularAngulo(cadera, rodilla, tobillo)
+
+        when (estadoSentadilla) {
+            "arriba" -> {
+                if (anguloPierna < 90) {
+                    estadoSentadilla = "abajo"
+                }
+            }
+            "abajo" -> {
+                if (anguloPierna > 150) {
+                    sentadillasCompletas++
+                    estadoSentadilla = "arriba"
+                    Log.d(TAG, "✅ Sentadilla completada: $sentadillasCompletas")
+                    guardarProgreso("Sentadillas", sentadillasCompletas)
+                }
+            }
+        }
+
+        runOnUiThread {
+            poseOverlay.setExtraText("Abdominales: $abdominalesCompletas")
+        }
+    }
+
+    private fun detectarLagartija(keypoints: FloatArray){
+        val hombro = getPoint(keypoints, 6)
+        val codo = getPoint(keypoints, 8)
+        val muneca = getPoint(keypoints, 10)
+        val anguloBrazo = calcularAngulo(hombro, codo, muneca)
+
+        when(estadoLagartija){
+            "arriba" ->{
+                if (anguloBrazo<90)
+                    estadoLagartija = "abajo"
+            }
+            "abajo" ->{
+                if (anguloBrazo>150){
+                    lagartijasCompletas++
+                    estadoLagartija = "arriba"
+                    Log.d(TAG, "✅ Lagartija completada: $lagartijasCompletas")
+                    guardarProgreso("Lagartija", lagartijasCompletas)
+                }
+            }
+        }
+
+        runOnUiThread {
+            poseOverlay.setExtraText("Lagartijas: $lagartijasCompletas")
+        }
+    }
+
+    private fun detectarAbdominal(keypoints: FloatArray) {
+        val hombro = getPoint(keypoints, 6)
+        val cadera = getPoint(keypoints, 12)
+        val rodilla = getPoint(keypoints, 14)
+
+        val anguloTronco = calcularAngulo(hombro, cadera, rodilla)
+        Log.d(TAG, "\uD83E\uDD38\u200D♂\uFE0F Angulo tronco: $anguloTronco")
+
+        when (abdominalEstado) {
+            "inicio" -> {
+                if (anguloTronco < 100) {
+                    abdominalEstado = "subiendo"
+                    Log.d(TAG, "⬆️ Subiendo")
+                }
+            }
+            "subiendo" -> {
+                if (anguloTronco > 150) {
+                    abdominalesCompletas++
+                    abdominalEstado = "inicio"
+                    Log.d(TAG, "✅ Abdominal completada: $abdominalesCompletas")
+                    guardarProgreso("Abdominal", abdominalesCompletas)
+                }
+            }
+        }
+
+        runOnUiThread {
+            poseOverlay.setExtraText("Abdominales: $abdominalesCompletas")
+        }
+    }
+
+    private fun getPoint(keypoints: FloatArray, index: Int): Pair<Float, Float>{
+        val x = keypoints[index * 3]
+        val y = keypoints[index * 3+1]
+        return Pair(x, y)
+    }
+
+    private fun guardarProgreso(nombreEjercicio: String, repeticiones: Int){
+        val prefs = getSharedPreferences("ProgrsoEjercicios", MODE_PRIVATE)
         val editor = prefs.edit()
-        editor.putInt("reps_sentadilla", reps)
-        editor.apply()
-    }
 
-    private fun cargarProgreso() {
-        val prefs = getSharedPreferences("fitcam_prefs", MODE_PRIVATE)
-        contador = prefs.getInt("squats", 0)
+        val fecha = SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(Date())
+
+        val clave = "${fecha}_$nombreEjercicio"
+
+        editor.putInt(clave, repeticiones)
+        editor.apply()
+        Log.d(TAG, "\uD83D\uDCBE Guardado: $nombreEjercicio -> $repeticiones el $fecha")
     }
 
     override fun onDestroy() {
