@@ -28,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Usuario"
             android:screenOrientation="portrait"
@@ -37,7 +38,14 @@
             android:name=".TestCamera"
             android:screenOrientation="portrait"
             android:exported="false"
-            tools:ignore="Instantiatable" />
+            tools:ignore="Instantiatable"/>
+
+        <activity android:name=".Historial"/>
+
+        <activity android:name=".SeleccionEjercicio"/>
+
+        <activity android:name=".SeleccionDia"/>
+
     </application>
 
 </manifest>
