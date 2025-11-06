@@ -5,11 +5,31 @@
     android:padding="24dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textDetalle"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:lineSpacingExtra="6dp"/>
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnAtras"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/atras"
+            android:scaleType="fitXY"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/chevron_left"
+            android:layout_margin="3dp"/>
+
+        <TextView
+            android:id="@+id/textDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:lineSpacingExtra="6dp"
+            android:text="Dia"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

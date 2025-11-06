@@ -3,6 +3,7 @@ package com.paquito.fitcam_
 import android.content.Intent
 import android.os.Bundle
 import android.widget.GridLayout
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -20,8 +21,14 @@ class Historial : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.historial)
 
+        val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
+
         contenedorMeses = findViewById(R.id.contenedorMeses)
         generarCalendariosPorMes()
+
+        btnAtras.setOnClickListener {
+            finish()
+        }
     }
 
     private fun generarCalendariosPorMes() {
@@ -87,6 +94,7 @@ class Historial : ComponentActivity() {
                 textSize = 16f
                 setPadding(8, 8, 8, 8)
                 setBackgroundResource(R.drawable.btn_dia_fondo)
+                setTextColor(ContextCompat.getColor(context, R.color.white))
 
                 if (todasLasFechas.contains(fecha))
                     background.setTint(ContextCompat.getColor(context, R.color.diaActivo))
@@ -98,9 +106,13 @@ class Historial : ComponentActivity() {
                 }
             }
 
+            val displayMetrics = resources.displayMetrics
+            val anchoPantalla = displayMetrics.widthPixels
+            val anchoDia = (anchoPantalla / 7.2).toInt()
+
             val params = GridLayout.LayoutParams().apply {
-                width = 120
-                height = 120
+                width = anchoDia
+                height = anchoDia
                 setMargins(6, 6, 6, 6)
             }
 

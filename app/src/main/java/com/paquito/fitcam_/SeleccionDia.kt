@@ -1,6 +1,7 @@
 package com.paquito.fitcam_
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 
@@ -8,6 +9,8 @@ class SeleccionDia : ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion_dia)
+
+        val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
 
         val textDetalle = findViewById<TextView>(R.id.textDetalle)
         val fecha = intent.getStringExtra("fecha")
@@ -32,6 +35,10 @@ class SeleccionDia : ComponentActivity(){
                 }
             }
             textDetalle.text = builder.toString()
+        }
+
+        btnAtras.setOnClickListener {
+            finish()
         }
     }
 }
