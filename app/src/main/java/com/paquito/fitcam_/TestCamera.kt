@@ -235,7 +235,7 @@ class TestCamera : ComponentActivity() {
         }
 
         runOnUiThread {
-            poseOverlay.setExtraText("Abdominales: $abdominalesCompletas")
+            poseOverlay.setExtraText("Sentadillas: $abdominalesCompletas")
         }
     }
 
