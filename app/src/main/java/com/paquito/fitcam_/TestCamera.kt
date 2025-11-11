@@ -216,6 +216,17 @@ class TestCamera : ComponentActivity() {
         val cadera = getPoint(keypoints, 12)
         val rodilla = getPoint(keypoints, 14)
         val tobillo = getPoint(keypoints, 16)
+
+        val scoreCadera = keypoints[12 * 3 + 2]
+        val scoreRodilla = keypoints[14 * 3 + 2]
+        val scoreTobillo = keypoints[16 * 3 + 2]
+
+        // Si falta alguno, salir sin contar
+        if (scoreCadera < 0.3f || scoreRodilla < 0.3f || scoreTobillo < 0.3f) {
+            Log.d(TAG, "⚠️ No se detectan bien los puntos clave (cadera, rodilla, tobillo)")
+            return
+        }
+
         val anguloPierna = calcularAngulo(cadera, rodilla, tobillo)
 
         when (estadoSentadilla) {
@@ -235,7 +246,7 @@ class TestCamera : ComponentActivity() {
         }
 
         runOnUiThread {
-            poseOverlay.setExtraText("Sentadillas: $abdominalesCompletas")
+            poseOverlay.setExtraText("Sentadillas: $sentadillasCompletas")
         }
     }
 
@@ -243,6 +254,17 @@ class TestCamera : ComponentActivity() {
         val hombro = getPoint(keypoints, 6)
         val codo = getPoint(keypoints, 8)
         val muneca = getPoint(keypoints, 10)
+
+        val scoreHombro = keypoints[6 * 3 + 2]
+        val scoreCodo = keypoints[8 * 3 + 2]
+        val scoremuneca = keypoints[10 * 3 + 2]
+
+        // Si falta alguno, salir sin contar
+        if (scoreHombro < 0.3f || scoreCodo < 0.3f || scoremuneca < 0.3f) {
+            Log.d(TAG, "⚠️ No se detectan bien los puntos clave (hombro, codo, muñeca)")
+            return
+        }
+
         val anguloBrazo = calcularAngulo(hombro, codo, muneca)
 
         when(estadoLagartija){
@@ -269,6 +291,16 @@ class TestCamera : ComponentActivity() {
         val hombro = getPoint(keypoints, 6)
         val cadera = getPoint(keypoints, 12)
         val rodilla = getPoint(keypoints, 14)
+
+        val scoreHombro = keypoints[6 * 3 + 2]
+        val scoreCadera = keypoints[12 * 3 + 2]
+        val scoreRodilla = keypoints[14 * 3 + 2]
+
+        // Si falta alguno, salir sin contar
+        if (scoreHombro < 0.3f || scoreCadera < 0.3f || scoreRodilla < 0.3f) {
+            Log.d(TAG, "⚠️ No se detectan bien los puntos clave (hombro, cadera, rodilla)")
+            return
+        }
 
         val anguloTronco = calcularAngulo(hombro, cadera, rodilla)
         Log.d(TAG, "\uD83E\uDD38\u200D♂\uFE0F Angulo tronco: $anguloTronco")
@@ -302,7 +334,7 @@ class TestCamera : ComponentActivity() {
     }
 
     private fun guardarProgreso(nombreEjercicio: String, repeticiones: Int){
-        val prefs = getSharedPreferences("ProgrsoEjercicios", MODE_PRIVATE)
+        val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
         val editor = prefs.edit()
 
         val fecha = SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(Date())
@@ -313,6 +345,10 @@ class TestCamera : ComponentActivity() {
         editor.apply()
         Log.d(TAG, "\uD83D\uDCBE Guardado: $nombreEjercicio -> $repeticiones el $fecha")
     }
+
+    /*private fun checarPersona(keypoints: FloatArray) {
+
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()

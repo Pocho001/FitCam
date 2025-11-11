@@ -6,6 +6,7 @@ import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
@@ -22,12 +23,29 @@ class Historial : ComponentActivity() {
         setContentView(R.layout.historial)
 
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
+        val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
+        val btnFavoritos = findViewById<ImageButton>(R.id.btnFavoritos)
+        val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
 
         contenedorMeses = findViewById(R.id.contenedorMeses)
         generarCalendariosPorMes()
 
         btnAtras.setOnClickListener {
             finish()
+        }
+
+        btnCasa.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnPerfil.setOnClickListener {
+            val intent = Intent(this, Usuario::class.java)
+            startActivity(intent)
+        }
+
+        btnFavoritos.setOnClickListener {
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -48,7 +66,6 @@ class Historial : ComponentActivity() {
     }
 
     private fun agregarMes(mes: Calendar, hoy: Calendar, todasLasFechas: Set<String>) {
-        // Titulo del mes
         val tituloMes = TextView(this).apply {
             text = formatoMes.format(mes.time).replaceFirstChar { it.uppercase() }
             textSize = 20f
@@ -56,14 +73,12 @@ class Historial : ComponentActivity() {
             setPadding(0, 24, 0, 16)
         }
 
-        // Crear el grid del mes
         val grid = GridLayout(this).apply {
             columnCount = 7
             alignmentMode = GridLayout.ALIGN_BOUNDS
             useDefaultMargins = true
         }
 
-        // Agregar encabezados L, M, X, J, V, S, D
         val diasSemana = listOf("L", "M", "X", "J", "V", "S", "D")
         for (dia in diasSemana) {
             val header = TextView(this).apply {
@@ -75,19 +90,22 @@ class Historial : ComponentActivity() {
             grid.addView(header)
         }
 
-        // Posicionar correctamente el primer dia del mes
-        val primerDiaSemana = (mes.get(Calendar.DAY_OF_WEEK) + 5) % 7 // Lunes = 0
+        val primerDiaSemana = (mes.get(Calendar.DAY_OF_WEEK) + 5) % 7
         repeat(primerDiaSemana) {
             grid.addView(TextView(this))
         }
 
-        // Agregar los dias
         val diasEnMes = mes.getActualMaximum(Calendar.DAY_OF_MONTH)
         for (dia in 1..diasEnMes) {
-            mes.set(Calendar.DAY_OF_MONTH, dia)
-            if (mes.after(hoy)) break
+            val fechaTemp = Calendar.getInstance().apply {
+                time = mes.time
+                set(Calendar.DAY_OF_MONTH, dia)
+            }
 
-            val fecha = formato.format(mes.time)
+            if (fechaTemp.after(hoy)) break
+
+            val fecha = formato.format(fechaTemp.time)
+
             val botonDia = TextView(this).apply {
                 text = dia.toString()
                 textAlignment = TextView.TEXT_ALIGNMENT_CENTER
@@ -96,8 +114,13 @@ class Historial : ComponentActivity() {
                 setBackgroundResource(R.drawable.btn_dia_fondo)
                 setTextColor(ContextCompat.getColor(context, R.color.white))
 
-                if (todasLasFechas.contains(fecha))
+                // Siempre vuelve al color normal primero
+                background.setTint(ContextCompat.getColor(context, R.color.dia_normal))
+
+                // Solo se pinta si esa fecha tiene progreso
+                if (todasLasFechas.contains(fecha)) {
                     background.setTint(ContextCompat.getColor(context, R.color.diaActivo))
+                }
 
                 setOnClickListener {
                     val intent = Intent(this@Historial, SeleccionDia::class.java)
@@ -108,7 +131,7 @@ class Historial : ComponentActivity() {
 
             val displayMetrics = resources.displayMetrics
             val anchoPantalla = displayMetrics.widthPixels
-            val anchoDia = (anchoPantalla / 7.2).toInt()
+            val anchoDia = (anchoPantalla / 10)
 
             val params = GridLayout.LayoutParams().apply {
                 width = anchoDia
@@ -120,7 +143,6 @@ class Historial : ComponentActivity() {
             grid.addView(botonDia)
         }
 
-        // Agregar todo al contenedor principal
         contenedorMeses.addView(tituloMes)
         contenedorMeses.addView(grid)
     }

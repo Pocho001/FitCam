@@ -26,8 +26,8 @@ class Usuario : ComponentActivity() {
         val editPeso = findViewById<EditText>(R.id.editPeso)
         val editAltura = findViewById<EditText>(R.id.editAltura)
 
-        val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnActualizar = findViewById<Button>(R.id.btnActualizar)
+        val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
         val btnFavoritos = findViewById<ImageButton>(R.id.btnFavoritos)
         val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
