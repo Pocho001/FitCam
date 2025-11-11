@@ -44,20 +44,37 @@ class Usuario : ComponentActivity() {
         txtAlturaActual.text = "Altura actual: ${if (alturaGuardada != 0f) alturaGuardada else "No registrada"} m"
 
         btnActualizar.setOnClickListener {
-            val nuevoPeso = editPeso.text.toString().toFloatOrNull()
-            val nuevaAltura = editAltura.text.toString().toFloatOrNull()
+            val pesoTexto = editPeso.text.toString()
+            val alturaTexto = editAltura.text.toString()
 
-            if(nuevoPeso != null && nuevaAltura != null){
-                prefs.edit {
-                    putFloat("peso", nuevoPeso)
-                    putFloat("altura", nuevaAltura)
-                }
-
-                txtPesoActual.text = "Peso Actual $nuevoPeso kg"
-                txtAlturaActual.text = "Altura Actual $nuevaAltura m"
-                editPeso.text.clear()
-                editAltura.text.clear()
+            if (pesoTexto.isBlank() || alturaTexto.isBlank()) {
+                Toast.makeText(this, "Por favor, ingresa todos los datos requeridos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            val nuevoPeso = pesoTexto.toFloatOrNull()
+            val nuevaAltura = alturaTexto.toFloatOrNull()
+
+            if (nuevoPeso == null || nuevaAltura == null) {
+                Toast.makeText(this, "Los datos ingresados no son válidos.\nVerifica e inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (nuevoPeso !in 40.0..100.0 || nuevaAltura !in 1.0..2.5){
+                Toast.makeText(this, "Los datos ingresados no son válidos.\nVerifica e inténtalo de nuevo.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            prefs.edit {
+                putFloat("peso", nuevoPeso)
+                putFloat("altura", nuevaAltura)
+            }
+
+            txtPesoActual.text = "Peso Actual $nuevoPeso kg"
+            txtAlturaActual.text = "Altura Actual $nuevaAltura m"
+            editPeso.text.clear()
+            editAltura.text.clear()
+            Toast.makeText(this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show()
         }
 
         btnAtras.setOnClickListener {

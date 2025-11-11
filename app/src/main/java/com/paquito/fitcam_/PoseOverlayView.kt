@@ -120,17 +120,18 @@ class PoseOverlayView @JvmOverloads constructor(
         // Mostrar contador
         canvas.drawText(
             "Puntos: $detectedCount/17",
-            50f,
-            100f,
+            20f,
+            60f,
             textPaint
         )
 
         if (extraText.isNotEmpty()) {
             val textPaint = Paint().apply {
                 color = Color.YELLOW
-                textSize = 48f
+                textSize = 36f
                 style = Paint.Style.FILL
                 textAlign = Paint.Align.LEFT
+                isAntiAlias = true
             }
             canvas.drawText(extraText, 40f, 80f, textPaint)
         }
