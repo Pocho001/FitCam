@@ -46,6 +46,8 @@
 
         <activity android:name=".SeleccionDia"/>
 
+        <activity android:name=".TuProgreso" />
+
     </application>
 
 </manifest>

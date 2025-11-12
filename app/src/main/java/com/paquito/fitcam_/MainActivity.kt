@@ -76,7 +76,8 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnTuProgreso.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TuProgreso::class.java)
+            startActivity(intent)
         }
 
         btnCasa.setOnClickListener {
