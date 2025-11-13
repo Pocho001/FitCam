@@ -53,15 +53,14 @@ class Historial : ComponentActivity() {
     }
 
     private fun generarDatosEjemplo() {
-        // 🔹 Datos de ejemplo (solo para pruebas)
+        // Datos Falsos para probar
         val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
         val editor = prefs.edit()
 
         val ejercicios = listOf("Sentadilla", "Flexiones", "Abdominales")
         val random = Random()
-        val calendar = Calendar.getInstance()
 
-// Generar 15 dias aleatorios con ejercicios y reps
+        // Generar 15 dias aleatorios con ejercicios y repeticiones
         repeat(15) {
             val diaAleatorio = random.nextInt(28) + 1 // día del mes
             val mesAleatorio = random.nextInt(3) // últimos 3 meses
@@ -76,7 +75,7 @@ class Historial : ComponentActivity() {
             val ejercicio = ejercicios.random()
             val reps = (10..40).random()
 
-            // 🔸 Guardar en SharedPreferences (simula progreso real)
+            // Guardar en SharedPreferences (simula progreso real) (archivo xml)
             editor.putString("${fechaStr}_$ejercicio", "$reps repeticiones")
         }
 

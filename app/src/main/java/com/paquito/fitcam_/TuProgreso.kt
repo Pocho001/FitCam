@@ -87,7 +87,7 @@ class TuProgreso : ComponentActivity() {
             circleRadius = 5f
             setCircleColor(Color.YELLOW)
             setDrawValues(true)
-            mode = LineDataSet.Mode.CUBIC_BEZIER // curva suave
+            mode = LineDataSet.Mode.CUBIC_BEZIER
         }
 
         chart.data = LineData(dataSet)

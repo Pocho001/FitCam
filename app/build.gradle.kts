@@ -59,18 +59,20 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    // Layout - layout "nuevo" en apps android
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // TensorFlow Lite - Solo estas 2 líneas
+    // TensorFlow Lite - deteccion de movimiento
     implementation("org.tensorflow:tensorflow-lite:2.14.0")
     implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
 
-    // CameraX
+    // CameraX - manejo de la camara "nuevo"
     val cameraxVersion = "1.3.4"
     implementation("androidx.camera:camera-core:$cameraxVersion")
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
+    // MPAndroidChart - graficas
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
