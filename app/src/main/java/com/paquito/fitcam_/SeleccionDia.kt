@@ -31,7 +31,7 @@ class SeleccionDia : ComponentActivity(){
                 val partes = clave.split("_")
                 if (partes.size == 2) {
                     val ejercicio = partes[1]
-                    builder.append("\uD83D\uDCAA $ejercicio: $valor repeticiones\\n")
+                    builder.append("\uD83D\uDCAA $ejercicio: $valor\n")
                 }
             }
             textDetalle.text = builder.toString()

@@ -65,16 +65,26 @@ class Usuario : ComponentActivity() {
                 return@setOnClickListener
             }
 
-            prefs.edit {
-                putFloat("peso", nuevoPeso)
-                putFloat("altura", nuevaAltura)
+            try {
+                prefs.edit {
+                    putFloat("peso", nuevoPeso)
+                    putFloat("altura", nuevaAltura)
+                }
+
+                txtPesoActual.text = "Peso Actual $nuevoPeso kg"
+                txtAlturaActual.text = "Altura Actual $nuevaAltura m"
+                editPeso.text.clear()
+                editAltura.text.clear()
+                Toast.makeText(this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show()
+
+            } catch (e: Exception){
+                Toast.makeText(
+                    this,
+                    "Ocurrió un error al guardar la información.\nIntenta nuevamente.",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
-            txtPesoActual.text = "Peso Actual $nuevoPeso kg"
-            txtAlturaActual.text = "Altura Actual $nuevaAltura m"
-            editPeso.text.clear()
-            editAltura.text.clear()
-            Toast.makeText(this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show()
         }
 
         btnAtras.setOnClickListener {

@@ -27,6 +27,7 @@ class TuProgreso : ComponentActivity() {
         val btnFavoritos = findViewById<ImageButton>(R.id.btnFavoritos)
         val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
         val txtTuProgreso = findViewById<TextView>(R.id.textTuProgreso)
+        val txtUltimos30Dias = findViewById<TextView>(R.id.textUltimos30dias)
 
         txtTuProgreso.text = "Tu Progreso"
 
