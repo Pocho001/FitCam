@@ -36,8 +36,6 @@ class TestCamera : ComponentActivity() {
     private lateinit var poseOverlay: PoseOverlayView
     private var interpreter: Interpreter? = null
     private lateinit var imageProcessor: ImageProcessor
-    private var contador = 0
-    private var estaAbajo = false
     private var tipoEjercicio: String? = null
     private var abdominalEstado = "inicio"
     private var abdominalesCompletas = 0
