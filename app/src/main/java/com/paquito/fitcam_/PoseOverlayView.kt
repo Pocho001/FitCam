@@ -116,12 +116,16 @@ class PoseOverlayView @JvmOverloads constructor(
                 )
             }
         }
+        val margin = 20f
+        textPaint.textAlign = Paint.Align.RIGHT
 
+        val fm = textPaint.fontMetrics
+        val yPos = margin - fm.top
         // Mostrar contador
         canvas.drawText(
             "Puntos: $detectedCount/17",
-            20f,
-            60f,
+            width - margin,
+            yPos,
             textPaint
         )
 
