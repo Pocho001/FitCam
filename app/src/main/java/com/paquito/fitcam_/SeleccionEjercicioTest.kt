@@ -29,7 +29,7 @@ class SeleccionEjercicioTest : ComponentActivity(){
     }
 
     private fun abrirCamara(tipo: String){
-        val intent = Intent(this, TestCamera::class.java)
+        val intent = Intent(this, Camara::class.java)
         intent.putExtra("ejercicio", tipo)
         startActivity(intent)
     }

@@ -35,7 +35,7 @@
             android:exported="false"/>
 
         <activity
-            android:name=".TestCamera"
+            android:name=".Camara"
             android:screenOrientation="portrait"
             android:exported="false"
             tools:ignore="Instantiatable"/>
@@ -47,6 +47,8 @@
         <activity android:name=".SeleccionDia"/>
 
         <activity android:name=".TuProgreso" />
+
+        <activity android:name=".SeleccionEjercicioBrazo"/>
 
     </application>
 
