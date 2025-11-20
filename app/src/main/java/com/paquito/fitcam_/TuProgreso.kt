@@ -151,9 +151,14 @@ class TuProgreso : ComponentActivity() {
             granularity = 1f
             // Se convierte el numero por fecha real
             valueFormatter = object : ValueFormatter() {
+                // Convertir un número Float del eje X del grafico en un String
                 override fun getFormattedValue(value: Float): String {
+                    // Se convierte el "value" en entero
                     val i = value.toInt()
-                    // substring(5) elimina el año y el "-"
+                    // if (i in fechasOrdenadas.indices)
+                    // Se verifica que el indice exista en la lista de la lista ordenada
+                    // fechasOrdenadas[i].substring(5)
+                    // Se corta la fecha al caracter 5 hacia adelante (2024-) mostrando mes y día
                     return if (i in fechasOrdenadas.indices) fechasOrdenadas[i].substring(5) else ""
                 }
             }
