@@ -42,7 +42,7 @@
 
         <activity android:name=".Historial"/>
 
-        <activity android:name=".SeleccionEjercicio"/>
+        <activity android:name=".SeleccionEjercicioTest"/>
 
         <activity android:name=".SeleccionDia"/>
 

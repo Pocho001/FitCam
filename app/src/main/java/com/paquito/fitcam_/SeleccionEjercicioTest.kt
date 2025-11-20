@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 
-class SeleccionEjercicio : ComponentActivity(){
+class SeleccionEjercicioTest : ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion_ejercicio)

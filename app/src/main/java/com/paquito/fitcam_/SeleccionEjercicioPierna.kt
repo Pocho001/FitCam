@@ -3,12 +3,9 @@ package com.paquito.fitcam_
 import androidx.activity.ComponentActivity
 import android.os.Bundle
 
-class Favoritos : ComponentActivity(){
+class SeleccionEjercicioPierna : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.favoritos)
-
-        val prefs = getSharedPreferences("Favoritos", MODE_PRIVATE)
-
+        setContentView(R.layout.seleccion_ejercicio_pierna)
     }
 }
