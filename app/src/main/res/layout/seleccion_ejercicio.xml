@@ -7,13 +7,6 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnSentadilla"
-        android:text="@string/sentadillas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
         android:id="@+id/btnLagartija"
         android:text="@string/lagartijas"
         android:layout_width="match_parent"

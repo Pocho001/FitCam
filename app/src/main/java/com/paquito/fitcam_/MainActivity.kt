@@ -1,5 +1,6 @@
 package com.paquito.fitcam_
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnPierna.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicioTest::class.java)
+            val intent = Intent(this, SeleccionEjercicioPierna::class.java)
             startActivity(intent)
         }
         btnBrazo.setOnClickListener {

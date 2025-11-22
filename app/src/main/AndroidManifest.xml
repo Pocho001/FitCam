@@ -48,7 +48,10 @@
 
         <activity android:name=".TuProgreso" />
 
+        <activity android:name=".SeleccionEjercicioPierna" />
+
         <activity android:name=".SeleccionEjercicioBrazo"/>
+
 
     </application>
 
