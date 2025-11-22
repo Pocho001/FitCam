@@ -86,7 +86,8 @@ class MainActivity : ComponentActivity() {
         }
 
         btnFavoritos.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
 
         btnPerfil.setOnClickListener {
