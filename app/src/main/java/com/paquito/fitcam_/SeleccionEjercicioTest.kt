@@ -10,17 +10,6 @@ class SeleccionEjercicioTest : ComponentActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion_ejercicio)
 
-        val btnLagartija = findViewById<Button>(R.id.btnLagartija)
-        val btnAbdominal = findViewById<Button>(R.id.btnAbdominal)
-
-
-        btnLagartija.setOnClickListener {
-            abrirCamara("Lagartija")
-        }
-
-        btnAbdominal.setOnClickListener {
-            abrirCamara("Abdominal")
-        }
 
     }
 
