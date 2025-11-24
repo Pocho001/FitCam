@@ -60,6 +60,7 @@ class MainActivity : ComponentActivity() {
         }
         btnPierna.setOnClickListener {
             val intent = Intent(this, SeleccionEjercicio::class.java)
+            intent.putExtra("area", "Pierna")
             startActivity(intent)
         }
         btnBrazo.setOnClickListener {
