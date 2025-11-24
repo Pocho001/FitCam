@@ -68,7 +68,9 @@ class MainActivity : ComponentActivity() {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
         btnEspalda.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SeleccionEjercicio::class.java)
+            intent.putExtra("area", "Espalda")
+            startActivity(intent)
         }
         btnDorso.setOnClickListener {
             val intent = Intent(this, SeleccionEjercicio::class.java)
