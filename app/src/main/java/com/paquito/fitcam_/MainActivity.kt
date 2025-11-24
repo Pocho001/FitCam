@@ -58,6 +58,7 @@ class MainActivity : ComponentActivity() {
             val intent = Intent(this, TestCamera::class.java)
             startActivity(intent)
         }
+        
         btnPierna.setOnClickListener {
             val intent = Intent(this, SeleccionEjercicio::class.java)
             intent.putExtra("area", "Pierna")
