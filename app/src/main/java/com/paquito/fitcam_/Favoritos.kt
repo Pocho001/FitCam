@@ -41,7 +41,7 @@ class Favoritos : ComponentActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            val intent = Intent(this, Usuario::class.java)
+            val intent = Intent(this, DatosDeUsuario::class.java)
             startActivity(intent)
             finish()
         }

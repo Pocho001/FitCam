@@ -96,19 +96,17 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnBrazo.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicioBrazo::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Ya se encuentra en el main", Toast.LENGTH_SHORT).show()
         }
         btnEspalda.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicioEspalda::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Ya se encuentra en el main", Toast.LENGTH_SHORT).show()
         }
         btnDorso.setOnClickListener {
             val intent = Intent(this, SeleccionEjercicioDorso::class.java)
             startActivity(intent)
         }
         btnHistorial.setOnClickListener {
-            val intent = Intent(this, Historial::class.java)
+            val intent = Intent(this, MostrarCalendario::class.java)
             startActivity(intent)
         }
         btnTuProgreso.setOnClickListener {
@@ -126,7 +124,7 @@ class MainActivity : ComponentActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            val intent = Intent(this, Usuario::class.java)
+            val intent = Intent(this, DatosDeUsuario::class.java)
             startActivity(intent)
         }
     }

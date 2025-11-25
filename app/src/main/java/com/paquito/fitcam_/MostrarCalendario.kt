@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Historial : ComponentActivity() {
+class MostrarCalendario : ComponentActivity() {
 
     private lateinit var contenedorMeses: LinearLayout
     private val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -20,7 +20,7 @@ class Historial : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.historial)
+        setContentView(R.layout.mostrar_calendario)
 
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
@@ -41,28 +41,38 @@ class Historial : ComponentActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            val intent = Intent(this, Usuario::class.java)
+            val intent = Intent(this, DatosDeUsuario::class.java)
             startActivity(intent)
         }
 
         btnFavoritos.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
     }
 
     private fun generarCalendariosPorMes() {
-        val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
-        val todasLasFechas = prefs.all.keys.mapNotNull { it.split("_").firstOrNull() }.toSet()
+        try {
+            val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
+            val todasLasFechas = prefs.all.keys.mapNotNull { it.split("_").firstOrNull() }.toSet()
 
-        val hoy = Calendar.getInstance()
+            val hoy = Calendar.getInstance()
 
-        // Generar los ultimos 3 meses (incluyendo el actual)
-        for (i in 0..2) {
-            val mes = Calendar.getInstance().apply {
-                add(Calendar.MONTH, -i)
-                set(Calendar.DAY_OF_MONTH, 1)
+            // Generar los ultimos 3 meses (incluyendo el actual)
+            for (i in 0..2) {
+                val mes = Calendar.getInstance().apply {
+                    add(Calendar.MONTH, -i)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
+                agregarMes(mes, hoy, todasLasFechas)
             }
-            agregarMes(mes, hoy, todasLasFechas)
+        } catch (e: Exception){
+            // Mensaje de error que vé el usuario
+            Toast.makeText(
+                this,
+                "Ocurrió un error.\nIntenta nuevamente.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -124,7 +134,7 @@ class Historial : ComponentActivity() {
                 }
 
                 setOnClickListener {
-                    val intent = Intent(this@Historial, SeleccionDia::class.java)
+                    val intent = Intent(this@MostrarCalendario, SeleccionDia::class.java)
                     intent.putExtra("fecha", fecha)
                     startActivity(intent)
                 }

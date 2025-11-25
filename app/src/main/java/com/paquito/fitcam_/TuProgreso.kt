@@ -54,15 +54,15 @@ class TuProgreso : ComponentActivity() {
             startActivity(intent)
         }
 
-        // Boton Perfil de Usuario
         btnFavoritos.setOnClickListener {
-            // Aún no se termina este apartado (mensaje de error)
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
 
+        // Boton Perfil de Usuario
         btnPerfil.setOnClickListener {
             // Se empieza la "actividad Usuario" (Perfil)
-            val intent = Intent(this, Usuario::class.java)
+            val intent = Intent(this, DatosDeUsuario::class.java)
             startActivity(intent)
         }
     }
