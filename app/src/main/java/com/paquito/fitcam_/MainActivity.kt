@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
         val txtObservaTuProgreso = findViewById<TextView>(R.id.txtObservaTuProgreso)
         val txtHistorial = findViewById<TextView>(R.id.txtHistorial)
         val txtTuProgreso = findViewById<TextView>(R.id.txtTuProgreso)
+        val txtPruebaLaCamara = findViewById<TextView>(R.id.textPruebaLaCamara)
 
         val btnEjercicioAleatorio = findViewById<ImageButton>(R.id.btnEjercicioAleatorio)
         val btnPierna = findViewById<ImageButton>(R.id.btnPierna)
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
         val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
 
         txtConsejos.text = consejos.random()
+        txtPruebaLaCamara.text = "Prueba de la cámara"
         txtQueVamosAHacerHoy.text = "¿Qué vámos a hacer hoy?"
         txtPierna.text = "Pierna"
         txtBrazo.text = "Brazo"
