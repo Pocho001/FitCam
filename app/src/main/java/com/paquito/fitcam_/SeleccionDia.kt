@@ -23,7 +23,7 @@ class SeleccionDia : ComponentActivity(){
         val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
         val ejercicios = prefs.all.filterKeys { it.startsWith(fecha) }
 
-        if (ejercicios == null) {
+        if (ejercicios.isEmpty()) {
             textDetalle.text = "\uD83D\uDCC5 $fecha: No se registraron ejercicios"
         } else {
             val builder = StringBuilder("📅 $fecha:\n\n")

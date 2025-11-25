@@ -12,7 +12,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import android.graphics.Matrix
-import androidx.compose.ui.text.intl.Locale
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.tensorflow.lite.DataType
@@ -21,16 +20,13 @@ import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import com.paquito.fitcam_.utils.toBitmap
-import java.sql.Date
 import kotlin.math.abs
 import kotlin.math.atan2
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TestCamera : ComponentActivity() {
+class Camara : ComponentActivity() {
 
     private lateinit var viewFinder: PreviewView
     private lateinit var poseOverlay: PoseOverlayView
@@ -54,7 +50,7 @@ class TestCamera : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        setContentView(R.layout.test_camara)
+        setContentView(R.layout.camara)
         tipoEjercicio = intent.getStringExtra("ejercicio")
         Log.d(TAG, "Ejercicio seleccionado: $tipoEjercicio")
 

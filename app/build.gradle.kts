@@ -61,6 +61,7 @@ dependencies {
 
     // Layout - layout "nuevo" en apps android
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
     // TensorFlow Lite - deteccion de movimiento
     implementation("org.tensorflow:tensorflow-lite:2.14.0")

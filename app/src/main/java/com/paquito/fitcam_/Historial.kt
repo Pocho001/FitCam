@@ -29,7 +29,7 @@ class Historial : ComponentActivity() {
 
         contenedorMeses = findViewById(R.id.contenedorMeses)
 
-        generarDatosEjemplo()
+        //generarDatosEjemplo()
 
         generarCalendariosPorMes()
 

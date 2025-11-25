@@ -1,5 +1,6 @@
 package com.paquito.fitcam_
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +8,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import android.widget.TextView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
 
@@ -20,7 +23,35 @@ class MainActivity : ComponentActivity() {
             "No te saltes el desayuno 🍳",
             "Camina al menos 30 minutos al dia 🚶",
             "Duerme bien, tu cuerpo lo necesita 😴",
-            "No te compares, avanza a tu ritmo 💪"
+            "No te compares, avanza a tu ritmo 💪",
+            "Pequenos pasos diarios hacen grandes cambios 🌱",
+            "Respira profundo cuando te sientas estresado 😮‍💨",
+            "Tu cuerpo puede mas de lo que piensas 🔥",
+            "Haz un calentamiento ligero antes de entrenar 🏃‍♂️",
+            "No entrenes sin comer algo ligero antes 🍌",
+            "Un mal dia no arruina tu progreso ✨",
+            "Haz actividad fisica que realmente disfrutes 😄",
+            "Tu salud vale el esfuerzo 💚",
+            "No te rindas, vas mejorando 👊",
+            "Un descanso tambien es parte del progreso 🛌",
+            "Se constante, no perfecto ✔️",
+            "Haz ejercicio escuchando tu musica favorita 🎧",
+            "Come mas frutas y verduras cada dia 🍎🥦",
+            "Evita el exceso de azucar hoy 🍬❌",
+            "Sonrie, es parte de sentirte mejor 😁",
+            "Mantente en movimiento, aunque sea poquito 🕺",
+            "No olvides estirar despues de entrenar 🤸‍♂️",
+            "Hidrata tu piel despues de sudar 🧴",
+            "Cuidar tu cuerpo tambien es amor propio ❤️",
+            "Evita el celular 30 minutos antes de dormir 📵",
+            "Mejora tu postura cuando estes sentado 🪑",
+            "Descansa si te duele demasiado, escuchate 🤕",
+            "Tu version del futuro te agradecera este esfuerzo 🏆",
+            "Hoy puede ser tu mejor entrenamiento ✨",
+            "Come mas despacio para mejorar tu digestion 🍽️",
+            "Haz pausas activas si pasas mucho tiempo sentado 🔄",
+            "Salir a caminar despeja la mente 🌤️",
+            "No te castigues, aprende y sigue adelante 🌟"
         )
 
         val txtConsejos = findViewById<TextView>(R.id.txtConsejos)
@@ -32,6 +63,7 @@ class MainActivity : ComponentActivity() {
         val txtObservaTuProgreso = findViewById<TextView>(R.id.txtObservaTuProgreso)
         val txtHistorial = findViewById<TextView>(R.id.txtHistorial)
         val txtTuProgreso = findViewById<TextView>(R.id.txtTuProgreso)
+        val txtPruebaLaCamara = findViewById<TextView>(R.id.textPruebaLaCamara)
 
         val btnEjercicioAleatorio = findViewById<ImageButton>(R.id.btnEjercicioAleatorio)
         val btnPierna = findViewById<ImageButton>(R.id.btnPierna)
@@ -45,6 +77,7 @@ class MainActivity : ComponentActivity() {
         val btnPerfil = findViewById<ImageButton>(R.id.btnPerfil)
 
         txtConsejos.text = consejos.random()
+        txtPruebaLaCamara.text = "Prueba de la cámara"
         txtQueVamosAHacerHoy.text = "¿Qué vámos a hacer hoy?"
         txtPierna.text = "Pierna"
         txtBrazo.text = "Brazo"
@@ -55,31 +88,23 @@ class MainActivity : ComponentActivity() {
         txtTuProgreso.text = "Tu progreso"
 
         btnEjercicioAleatorio.setOnClickListener {
-            val intent = Intent(this, TestCamera::class.java)
+            val intent = Intent(this, Camara::class.java)
             startActivity(intent)
         }
-        
         btnPierna.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicio::class.java)
-            intent.putExtra("area", "Pierna")
+            val intent = Intent(this, SeleccionEjercicioPierna::class.java)
             startActivity(intent)
         }
         btnBrazo.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicio::class.java)
-            intent.putExtra("area", "Brazo")
-            startActivity(intent)
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
         btnEspalda.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicio::class.java)
-            intent.putExtra("area", "Espalda")
-            startActivity(intent)
+            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
         btnDorso.setOnClickListener {
-            val intent = Intent(this, SeleccionEjercicio::class.java)
-            intent.putExtra("area", "Torso")
+            val intent = Intent(this, SeleccionEjercicioDorso::class.java)
             startActivity(intent)
         }
-
         btnHistorial.setOnClickListener {
             val intent = Intent(this, Historial::class.java)
             startActivity(intent)
@@ -94,7 +119,8 @@ class MainActivity : ComponentActivity() {
         }
 
         btnFavoritos.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
 
         btnPerfil.setOnClickListener {

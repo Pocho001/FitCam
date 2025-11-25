@@ -15,6 +15,8 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TuProgreso : ComponentActivity() {
@@ -31,10 +33,12 @@ class TuProgreso : ComponentActivity() {
         // Textos
         val txtTuProgreso = findViewById<TextView>(R.id.textTuProgreso)
         val txtUltimos30Dias = findViewById<TextView>(R.id.textUltimos30dias)
+        val txtTusRepeticiones = findViewById<TextView>(R.id.textTusRepeticiones)
 
         // Se ponen los Strings en los TextView de los que van a tener
         txtTuProgreso.text = "Tu Progreso"
         txtUltimos30Dias.text = "Últimos 30 días de tu progreso"
+        txtTusRepeticiones.text = "Tus repeticiones"
 
         // Se crea una grafica (chart) de tipo LineChart
         val chart = findViewById<LineChart>(R.id.chartProgreso)
@@ -70,41 +74,47 @@ class TuProgreso : ComponentActivity() {
         // Se toma el formato "Año-Mes-Día"
         val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-        // Agrupar por día, sumando las repeticiones (String es el ejercicio y Int son las repeticiones
+        // Filtra los ultimos 30 días
+        val hoy = Calendar.getInstance()
+        val hace30 = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -30)
+        }
+
         val datosPorDia = mutableMapOf<String, Int>()
-        // Se recorre por todos los datos de los dias y ejercicios guardados
+
         for ((key, value) in prefs.all) {
-            // Se divide la key por el "_" ya que swe guarda la fecha y el ejercicio
-            // Ejemplo: 2024-10-17_sentadilla
             val partes = key.split("_")
-            // Si no tiene "_" se salta (no se partio ya q no encontró "_" en el procedimiento de arriba
             if (partes.size < 2) continue
 
-            // Se guarda la primera parte que contiene la fecha en la variable fecha
             val fecha = partes[0]
-            // Pasa el texto del value a un número Int
-            val texto = value.toString()
-            val reps = texto.filter { it.isDigit() }.toIntOrNull() ?: 0
-
-            // Se suman todos los ejercicios del mismo día
+            val reps = value.toString().filter { it.isDigit() }.toIntOrNull() ?: 0
             datosPorDia[fecha] = (datosPorDia[fecha] ?: 0) + reps
         }
 
+        // Contar repeticiones de los ultimos 30 dias
+        val txtRepeticionesTotales = findViewById<TextView>(R.id.textRepeticionesTotales)
+        val total30 = contarUltimos30Dias(datosPorDia)
+        txtRepeticionesTotales.text = "$total30"
+
+        val datosUltimos30 = datosPorDia.filter { (fechaStr, _) ->
+            val fecha = formato.parse(fechaStr) ?: return@filter false
+            fecha.after(hace30.time) || fecha == hace30.time
+        }
+
         // Si el getSharePreference no puede acceder al .xml o no tiene nada para mostrar
-        if (datosPorDia.isEmpty()) {
+        if (datosUltimos30.isEmpty()) {
             Toast.makeText(this, "No hay datos para mostrar aún", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Toma todas las fehas con datosPorDia y las ordena con .sortedBy { formato.parse(it) }
-        val fechasOrdenadas = datosPorDia.keys.sortedBy { formato.parse(it) }
+        // Toma todas las fehas con datosUltimos30 y las ordena con .sortedBy { formato.parse(it) }
+        val fechasOrdenadas = datosUltimos30.keys.sortedBy { formato.parse(it) }
         // Crea una lista vacia que se llenara con coordenadas para la gráfica
         val entradas = mutableListOf<Entry>()
 
         // Recorre la lista de fechas ordenadas
         fechasOrdenadas.forEachIndexed { index, fecha ->
-            // Transforma el valor del dia en flotante si existe
-            val valor = datosPorDia[fecha]?.toFloat() ?: 0f
+            val valor = datosUltimos30[fecha]?.toFloat() ?: 0f
             // Se crea un punto en la grafica con el indice y el valor encontrado
             entradas.add(Entry(index.toFloat(), valor))
         }
@@ -170,5 +180,22 @@ class TuProgreso : ComponentActivity() {
 
         // Se redibuja la gráfica
         chart.invalidate()
+    }
+
+    private fun contarUltimos30Dias(datos: Map<String, Int>): Int {
+        val formato = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val hoy = LocalDate.now()
+        val hace30 = hoy.minusDays(30)
+
+        var total = 0
+
+        for ((fechaStr, reps) in datos) {
+            val fecha = LocalDate.parse(fechaStr, formato)
+            if (fecha.isAfter(hace30) || fecha.isEqual(hace30)) {
+                total += reps
+            }
+        }
+
+        return total
     }
 }
