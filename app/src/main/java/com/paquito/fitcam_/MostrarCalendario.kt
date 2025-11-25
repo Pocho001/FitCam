@@ -6,6 +6,7 @@ import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
@@ -51,18 +52,27 @@ class MostrarCalendario : ComponentActivity() {
     }
 
     private fun generarCalendariosPorMes() {
-        val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
-        val todasLasFechas = prefs.all.keys.mapNotNull { it.split("_").firstOrNull() }.toSet()
+        try {
+            val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
+            val todasLasFechas = prefs.all.keys.mapNotNull { it.split("_").firstOrNull() }.toSet()
 
-        val hoy = Calendar.getInstance()
+            val hoy = Calendar.getInstance()
 
-        // Generar los ultimos 3 meses (incluyendo el actual)
-        for (i in 0..2) {
-            val mes = Calendar.getInstance().apply {
-                add(Calendar.MONTH, -i)
-                set(Calendar.DAY_OF_MONTH, 1)
+            // Generar los ultimos 3 meses (incluyendo el actual)
+            for (i in 0..2) {
+                val mes = Calendar.getInstance().apply {
+                    add(Calendar.MONTH, -i)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
+                agregarMes(mes, hoy, todasLasFechas)
             }
-            agregarMes(mes, hoy, todasLasFechas)
+        } catch (e: Exception){
+            // Mensaje de error que vé el usuario
+            Toast.makeText(
+                this,
+                "Ocurrió un error.\nIntenta nuevamente.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
