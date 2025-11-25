@@ -30,7 +30,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <!-- Botón de Favorito (genérico) -->
         <ImageButton
