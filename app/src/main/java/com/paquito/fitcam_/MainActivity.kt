@@ -61,11 +61,11 @@ class MainActivity : ComponentActivity() {
         val txtEspalda = findViewById<TextView>(R.id.txtEspalda)
         val txtDorso = findViewById<TextView>(R.id.txtDorso)
         val txtObservaTuProgreso = findViewById<TextView>(R.id.txtObservaTuProgreso)
-        val txtCalendario = findViewById<TextView>(R.id.txtMostrarCalendario)
+        val txtCalendario = findViewById<TextView>(R.id.txtCalendario)
         val txtTuProgreso = findViewById<TextView>(R.id.txtTuProgreso)
         val txtPruebaLaCamara = findViewById<TextView>(R.id.textPruebaLaCamara)
 
-        val btnEjercicioAleatorio = findViewById<ImageButton>(R.id.btnEjercicioAleatorio)
+        val btnCamara = findViewById<ImageButton>(R.id.btnCamara)
         val btnPierna = findViewById<ImageButton>(R.id.btnPierna)
         val btnBrazo = findViewById<ImageButton>(R.id.btnBrazo)
         val btnEspalda = findViewById<ImageButton>(R.id.btnEspalda)
@@ -87,7 +87,7 @@ class MainActivity : ComponentActivity() {
         txtCalendario.text = "Calendario"
         txtTuProgreso.text = "Tu progreso"
 
-        btnEjercicioAleatorio.setOnClickListener {
+        btnCamara.setOnClickListener {
             val intent = Intent(this, Camara::class.java)
             startActivity(intent)
         }

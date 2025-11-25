@@ -33,7 +33,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/btnEjercicioAleatorio"
+            android:id="@+id/btnCamara"
             android:layout_height="112dp"
             android:layout_width="366dp"
             android:src="@drawable/test_pipelines_icon"
