@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
         val txtEspalda = findViewById<TextView>(R.id.txtEspalda)
         val txtDorso = findViewById<TextView>(R.id.txtDorso)
         val txtObservaTuProgreso = findViewById<TextView>(R.id.txtObservaTuProgreso)
-        val txtMostrarCalendario = findViewById<TextView>(R.id.txtMostrarCalendario)
+        val txtCalendario = findViewById<TextView>(R.id.txtMostrarCalendario)
         val txtTuProgreso = findViewById<TextView>(R.id.txtTuProgreso)
         val txtPruebaLaCamara = findViewById<TextView>(R.id.textPruebaLaCamara)
 
@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
         txtEspalda.text = "Espalda"
         txtDorso.text = "Dorso"
         txtObservaTuProgreso.text = "Observa tu progreso"
-        txtMostrarCalendario.text = "Mostrar\nCalendario"
+        txtCalendario.text = "Calendario"
         txtTuProgreso.text = "Tu progreso"
 
         btnEjercicioAleatorio.setOnClickListener {
@@ -106,7 +106,7 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnHistorial.setOnClickListener {
-            val intent = Intent(this, MostrarCalendario::class.java)
+            val intent = Intent(this, Calendario::class.java)
             startActivity(intent)
         }
         btnTuProgreso.setOnClickListener {

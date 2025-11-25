@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MostrarCalendario : ComponentActivity() {
+class Calendario : ComponentActivity() {
 
     private lateinit var contenedorMeses: LinearLayout
     private val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -20,7 +20,7 @@ class MostrarCalendario : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.mostrar_calendario)
+        setContentView(R.layout.calendario)
 
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
@@ -134,7 +134,7 @@ class MostrarCalendario : ComponentActivity() {
                 }
 
                 setOnClickListener {
-                    val intent = Intent(this@MostrarCalendario, SeleccionDia::class.java)
+                    val intent = Intent(this@Calendario, SeleccionDia::class.java)
                     intent.putExtra("fecha", fecha)
                     startActivity(intent)
                 }

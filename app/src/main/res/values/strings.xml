@@ -31,4 +31,5 @@
     <string name="lagartijas">Lagartijas</string>
     <string name="abdominales">Abdominales</string>
     <string name="mostrar_calendario">Mostrar Calendario</string>
+    <string name="mostrar_ncalendario">Mostrar\nCalendario</string>
 </resources>
