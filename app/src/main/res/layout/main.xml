@@ -236,10 +236,10 @@
         android:layout_marginStart="9dp">
 
         <TextView
-            android:id="@+id/txtHistorial"
+            android:id="@+id/txtMostrarCalendario"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="@string/historial"
+            android:text="@string/mostrar_calendario"
             android:textColor="#000000"
             android:textSize="12sp"
             android:textStyle="bold"
