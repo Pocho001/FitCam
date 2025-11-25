@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.Fitcam" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Tema del SplashScreen -->
+    <style name="Theme.Fitcam.Splash" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">#FBBC05</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_fitcam_2</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.Fitcam</item>
+
+    </style>
+
 </resources>
