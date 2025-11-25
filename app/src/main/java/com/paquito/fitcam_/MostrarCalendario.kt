@@ -6,13 +6,12 @@ import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Historial : ComponentActivity() {
+class MostrarCalendario : ComponentActivity() {
 
     private lateinit var contenedorMeses: LinearLayout
     private val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -20,7 +19,7 @@ class Historial : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.historial)
+        setContentView(R.layout.mostrar_calendario)
 
         val btnAtras = findViewById<ImageButton>(R.id.btnAtras)
         val btnCasa = findViewById<ImageButton>(R.id.btnCasa)
@@ -41,12 +40,13 @@ class Historial : ComponentActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            val intent = Intent(this, Usuario::class.java)
+            val intent = Intent(this, DatosDeUsuario::class.java)
             startActivity(intent)
         }
 
         btnFavoritos.setOnClickListener {
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
     }
 
@@ -124,7 +124,7 @@ class Historial : ComponentActivity() {
                 }
 
                 setOnClickListener {
-                    val intent = Intent(this@Historial, SeleccionDia::class.java)
+                    val intent = Intent(this@MostrarCalendario, SeleccionDia::class.java)
                     intent.putExtra("fecha", fecha)
                     startActivity(intent)
                 }

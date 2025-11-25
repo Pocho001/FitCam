@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".Usuario"
+            android:name=".DatosDeUsuario"
             android:screenOrientation="portrait"
             android:exported="false"/>
 
@@ -40,7 +40,7 @@
             android:exported="false"
             tools:ignore="Instantiatable"/>
 
-        <activity android:name=".Historial"/>
+        <activity android:name=".MostrarCalendario"/>
 
         <activity android:name=".SeleccionEjercicioTest"/>
 

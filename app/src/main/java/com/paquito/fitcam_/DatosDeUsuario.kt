@@ -14,7 +14,7 @@ import androidx.core.content.edit
 import android.widget.Toast
 
 
-class Usuario : ComponentActivity() {
+class DatosDeUsuario : ComponentActivity() {
 
     // Se crea una variable constante y estática TAG que tenga la clase Usuario que es la actual
     // Que se ocupa en el Logcat
@@ -26,7 +26,7 @@ class Usuario : ComponentActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.datos_usuario)
+        setContentView(R.layout.datos_de_usuario)
 
         // Textos
         val txtPesoActual = findViewById<TextView>(R.id.textPesoActual)
@@ -148,10 +148,8 @@ class Usuario : ComponentActivity() {
 
         // Boton Favoritos
         btnFavoritos.setOnClickListener {
-            // Aún no se termina este apartado (mensaje de error)
-            Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
-            /*val intent = Intent(this, Favoritos::class.java)
-            startActivity(intent)*/
+            val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
         }
     }
 }
