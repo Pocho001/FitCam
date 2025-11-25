@@ -96,7 +96,8 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
         btnBrazo.setOnClickListener {
-            Toast.makeText(this, "Ya se encuentra en el main", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SeleccionEjercicioBrazo::class.java)
+            startActivity(intent)
         }
         btnEspalda.setOnClickListener {
             Toast.makeText(this, "Ya se encuentra en el main", Toast.LENGTH_SHORT).show()
