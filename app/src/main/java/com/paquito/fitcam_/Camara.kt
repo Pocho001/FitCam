@@ -39,6 +39,12 @@ class Camara : ComponentActivity() {
     private var sentadillasCompletas = 0
     private var estadoLagartija = "arriba"
     private var lagartijasCompletas = 0
+    private var estadoDominada = "arriba"
+    private var dominadasCompletas = 0
+    private var estadoCurl = "arriba"
+    private var curlsCompletas = 0
+
+
 
 
     companion object {
@@ -168,6 +174,8 @@ class Camara : ComponentActivity() {
                     "Sentadilla" -> detectarSentadilla(keypoints)
                     "Lagartija" -> detectarLagartija(keypoints)
                     "Abdominal" -> detectarAbdominal(keypoints)
+                    "Dominadas" -> detectarDominadas(keypoints)
+                    "Curl de Bicep" -> detectarCurlBiceps(keypoints)
                 }
 
                 // Actualizar el overlay en el hilo principal
@@ -320,6 +328,95 @@ class Camara : ComponentActivity() {
             poseOverlay.setExtraText("Abdominales: $abdominalesCompletas")
         }
     }
+
+    private fun detectarDominadas(keypoints: FloatArray) {
+        // Usamos hombro(6), codo(8), muñeca(10) (lado derecho)
+        val hombro = getPoint(keypoints, 6)
+        val codo = getPoint(keypoints, 8)
+        val muneca = getPoint(keypoints, 10)
+
+        val scoreHombro = keypoints[6 * 3 + 2]
+        val scoreCodo = keypoints[8 * 3 + 2]
+        val scoreMuneca = keypoints[10 * 3 + 2]
+
+        // Si falta alguno, salir sin contar
+        if (scoreHombro < 0.3f || scoreCodo < 0.3f || scoreMuneca < 0.3f) {
+            Log.d(TAG, "⚠️ No se detectan bien los puntos clave (hombro, codo, muñeca) para dominadas")
+            return
+        }
+
+        // Ángulo en el codo (hombro - codo - muñeca)
+        val anguloCodo = calcularAngulo(hombro, codo, muneca)
+        Log.d(TAG, "🔎 Dominadas - ángulo codo: $anguloCodo")
+
+        when (estadoDominada) {
+            // posición inicial considerada 'arriba' (brazos extendidos en reposo)
+            "arriba" -> {
+                // Si el usuario sube (flexiona el codo) lo marcamos como 'abajo' (parte alta del movimiento)
+                if (anguloCodo < 90) {          // umbral para detectar fase superior
+                    estadoDominada = "abajo"
+                }
+            }
+            "abajo" -> {
+                // Cuando vuelve a la posición extendida (ángulo grande) contamos la repetición
+                if (anguloCodo > 150) {
+                    dominadasCompletas++
+                    estadoDominada = "arriba"
+                    Log.d(TAG, "✅ Dominada completada: $dominadasCompletas")
+                    guardarProgreso("Dominadas", dominadasCompletas)
+                }
+            }
+        }
+
+        runOnUiThread {
+            poseOverlay.setExtraText("Dominadas: $dominadasCompletas")
+        }
+    }
+
+    private fun detectarCurlBiceps(keypoints: FloatArray) {
+        // Usamos hombro(6), codo(8), muñeca(10) (lado derecho) — mide la flexión del codo
+        val hombro = getPoint(keypoints, 6)
+        val codo = getPoint(keypoints, 8)
+        val muneca = getPoint(keypoints, 10)
+
+        val scoreHombro = keypoints[6 * 3 + 2]
+        val scoreCodo = keypoints[8 * 3 + 2]
+        val scoreMuneca = keypoints[10 * 3 + 2]
+
+        // Si falta alguno, salir sin contar
+        if (scoreHombro < 0.3f || scoreCodo < 0.3f || scoreMuneca < 0.3f) {
+            Log.d(TAG, "⚠️ No se detectan bien los puntos clave (hombro, codo, muñeca) para curl")
+            return
+        }
+
+        // Ángulo en el codo (hombro - codo - muñeca)
+        val anguloCodo = calcularAngulo(hombro, codo, muneca)
+        Log.d(TAG, "🔎 Curl - ángulo codo: $anguloCodo")
+
+        when (estadoCurl) {
+            // tratamos 'arriba' como posición extendida inicial
+            "arriba" -> {
+                // cuando se flexiona lo consideramos 'abajo' (fase contracción)
+                if (anguloCodo < 60) {  // umbral más pequeño para curl (contracción)
+                    estadoCurl = "abajo"
+                }
+            }
+            "abajo" -> {
+                // cuando vuelve a posición extendida contamos la repetición
+                if (anguloCodo > 150) {
+                    curlsCompletas++
+                    estadoCurl = "arriba"
+                    Log.d(TAG, "✅ Curl completado: $curlsCompletas")
+                    guardarProgreso("Curl Bíceps", curlsCompletas)
+                }
+            }
+        }
+
+        runOnUiThread {
+            poseOverlay.setExtraText("Curls: $curlsCompletas")
+        }
+    }
+
 
     private fun getPoint(keypoints: FloatArray, index: Int): Pair<Float, Float>{
         val x = keypoints[index * 3]
