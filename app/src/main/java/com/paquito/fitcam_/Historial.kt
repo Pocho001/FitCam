@@ -29,8 +29,6 @@ class Historial : ComponentActivity() {
 
         contenedorMeses = findViewById(R.id.contenedorMeses)
 
-        //generarDatosEjemplo()
-
         generarCalendariosPorMes()
 
         btnAtras.setOnClickListener {
@@ -50,37 +48,6 @@ class Historial : ComponentActivity() {
         btnFavoritos.setOnClickListener {
             Toast.makeText(this, "Aún en construcción :c", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun generarDatosEjemplo() {
-        // Datos Falsos para probar
-        val prefs = getSharedPreferences("ProgresoEjercicios", MODE_PRIVATE)
-        val editor = prefs.edit()
-
-        val ejercicios = listOf("Sentadilla", "Flexiones", "Abdominales")
-        val random = Random()
-
-        // Generar 15 dias aleatorios con ejercicios y repeticiones
-        repeat(15) {
-            val diaAleatorio = random.nextInt(28) + 1 // día del mes
-            val mesAleatorio = random.nextInt(3) // últimos 3 meses
-            val fecha = Calendar.getInstance().apply {
-                add(Calendar.MONTH, -mesAleatorio)
-                set(Calendar.DAY_OF_MONTH, diaAleatorio)
-            }
-
-            if (fecha.after(Calendar.getInstance())) return@repeat // no generar futuro
-
-            val fechaStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(fecha.time)
-            val ejercicio = ejercicios.random()
-            val reps = (10..40).random()
-
-            // Guardar en SharedPreferences (simula progreso real) (archivo xml)
-            editor.putString("${fechaStr}_$ejercicio", "$reps repeticiones")
-        }
-
-        editor.apply()
-
     }
 
     private fun generarCalendariosPorMes() {
