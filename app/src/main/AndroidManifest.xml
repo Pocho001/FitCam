@@ -56,6 +56,9 @@
 
         <activity android:name=".SeleccionEjercicioBrazo"/>
 
+        <activity android:name=".SeleccionEjercicioEspalda"/>
+
+
 
     </application>
 
