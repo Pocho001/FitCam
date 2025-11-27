@@ -81,7 +81,7 @@ class Camara : ComponentActivity() {
 
     private fun setupModel() {
         try {
-            // Cargar el modelo
+            // Cargar el modelo desde assest
             val model = FileUtil.loadMappedFile(this, "movenet.tflite")
             val options = Interpreter.Options()
             options.setNumThreads(4)
@@ -103,15 +103,18 @@ class Camara : ComponentActivity() {
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
 
+            // Se crea el preview de lo que se va a ver
             val preview = Preview.Builder().build()
             preview.setSurfaceProvider(viewFinder.surfaceProvider)
 
+            // El analyzer va analizando cada imagen que la camara captura
             val imageAnalyzer = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also { analysis ->
                     analysis.setAnalyzer(ContextCompat.getMainExecutor(this)) { imageProxy ->
                         try {
+                            // Se convierte la imagen a Bitmap
                             val bitmap = imageProxy.toBitmap()
                             detectPose(bitmap)
                         } catch (e: Exception) {
@@ -139,8 +142,11 @@ class Camara : ComponentActivity() {
             try {
 
                 val matrix = Matrix()
+                // Se rota 90°
                 matrix.postRotate(-90f)
+                // Hacerle efecto "espejo"
                 matrix.postScale(-1f, 1f)
+                // Redimensionar la imagen a 192x192 para que lo reconozca TensorFlow
                 val rotatedBitmap  = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 
                 // Redimensionar el bitmap volteado antes de pasarlo al modelo
@@ -154,11 +160,12 @@ class Camara : ComponentActivity() {
                 val outputShape = intArrayOf(1, 1, 17, 3)
                 val outputBuffer = TensorBuffer.createFixedSize(outputShape, DataType.FLOAT32)
 
-                // Ejecutar inferencia
+                // Ejecutar modelo
                 interp.run(tensorImage.buffer, outputBuffer.buffer.rewind())
 
                 // Procesar resultados
                 val keypoints = outputBuffer.floatArray
+                // Ahora keypoints contiene los 17 puntos detectados
                 var detectedPoints = 0
 
                 for (i in 0 until 17) {

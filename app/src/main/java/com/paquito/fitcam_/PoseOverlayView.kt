@@ -12,28 +12,33 @@ class PoseOverlayView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+    // Paint para los puntos
     private val pointPaint = Paint().apply {
         color = Color.GREEN
         style = Paint.Style.FILL
         strokeWidth = 15f
     }
 
+    // Paint para las lineas
     private val linePaint = Paint().apply {
         color = Color.CYAN
         style = Paint.Style.STROKE
         strokeWidth = 8f
     }
 
+    // Paint para el texto
     private val textPaint = Paint().apply {
         color = Color.YELLOW
         textSize = 40f
         style = Paint.Style.FILL
     }
 
+    // Arreglo de 17 puntos del cuerpo
     private var keypoints: FloatArray? = null
+    // Cantidad de articulaciónes detectadas
     private var detectedCount: Int = 0
 
-    // Conexiones del esqueleto (índices de los keypoints a conectar)
+    // Conexiones del esqueleto (índices de los keypoints a conectar con lineas)
     private val connections = listOf(
         // Cara
         Pair(0, 1), Pair(0, 2), Pair(1, 3), Pair(2, 4),
@@ -51,28 +56,34 @@ class PoseOverlayView @JvmOverloads constructor(
 
     private var extraText: String = ""
 
+    // Actualiza los puntos detectados y redibuja la vista
     fun updateKeypoints(keypoints: FloatArray, detectedCount: Int) {
         this.keypoints = keypoints
         this.detectedCount = detectedCount
         invalidate() // Redibuja la vista
     }
 
+    // Borra el overlay
     fun clear() {
         keypoints = null
         detectedCount = 0
         invalidate()
     }
 
+    // Mostrar mensajes extra
     fun setExtraText(text: String){
         extraText = text
         invalidate()
     }
 
+    // Se ejecuta automaticamente cuando Android necesita mostrar la vista
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        // Si no hay keypoints no dibuja nada
         val kp = keypoints ?: return
 
+        // Se escalan al tamaño real de la pantalla
         val scaleX = width.toFloat()
         val scaleY = height.toFloat()
 
@@ -89,6 +100,7 @@ class PoseOverlayView @JvmOverloads constructor(
             val endX = kp[endIdx + 1]
             val endConf = kp[endIdx + 2]
 
+            // Si la "confianza" de los 2 puntos es alta se dibuja la linea
             if (startConf > 0.3f && endConf > 0.3f) {
                 canvas.drawLine(
                     startX * scaleX,
@@ -116,6 +128,8 @@ class PoseOverlayView @JvmOverloads constructor(
                 )
             }
         }
+
+        // Dibujar el contador
         val margin = 20f
         textPaint.textAlign = Paint.Align.RIGHT
 
@@ -129,6 +143,7 @@ class PoseOverlayView @JvmOverloads constructor(
             textPaint
         )
 
+        // Dibujar texto extra
         if (extraText.isNotEmpty()) {
             val textPaint = Paint().apply {
                 color = Color.YELLOW
