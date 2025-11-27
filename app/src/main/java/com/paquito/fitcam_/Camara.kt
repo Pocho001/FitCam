@@ -44,9 +44,6 @@ class Camara : ComponentActivity() {
     private var estadoCurl = "arriba"
     private var curlsCompletas = 0
 
-
-
-
     companion object {
         private const val TAG = "TestCamera"
         private const val MODEL_WIDTH = 192
@@ -443,10 +440,6 @@ class Camara : ComponentActivity() {
         editor.apply()
         Log.d(TAG, "\uD83D\uDCBE Guardado: $nombreEjercicio -> $repeticiones el $fecha")
     }
-
-    /*private fun checarPersona(keypoints: FloatArray) {
-
-    }*/
 
     override fun onDestroy() {
         super.onDestroy()
